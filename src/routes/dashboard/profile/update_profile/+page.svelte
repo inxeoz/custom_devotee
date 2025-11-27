@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { get_self_profile, update_profile } from "@src/helper_devoteee.js";
+    import { update_profile, profile } from "@src/api.js";
     import LoadingPage from "@src/routes/LoadingPage.svelte";
     import {
         Card,
@@ -17,13 +17,12 @@
 
     let loading = false;
 
-    let profle_data: any = null;
-
-    let name = "";
+    let devoteee_name = "";
     let gender = "";
     let dob = "";
-    let address = "";
+    let location = "";
     let aadhar = "";
+    let email = "";
 
     let touched = { name: false, gender: false, dob: false };
 
@@ -32,16 +31,14 @@
     async function handleSubmit(e) {
         e.preventDefault();
         loading = true;
-
-        const info = {
-            devoteee_name: name.trim(),
-            gender,
-            dob,
-            address: address.trim(),
-            aadhar: aadhar.trim(),
-        };
-
-        const json = await update_profile(info);
+        const json = await update_profile({
+            devoteee_name: devoteee_name,
+            email: email,
+            gender: gender,
+            dob: dob,
+            aadhar: aadhar,
+            location: location,
+        });
 
         toast(json?.message || "Profile saved.");
         submitted = true;
@@ -49,13 +46,14 @@
     }
 
     async function reset_profile() {
-        profle_data = await get_self_profile();
+        const profle_data = await profile();
 
-        name = profle_data?.devoteee_name ?? "";
+        devoteee_name = profle_data?.devoteee_name ?? "";
         gender = profle_data?.gender ?? "";
         dob = profle_data?.dob ?? "";
-        address = profle_data?.address ?? "";
+        location = profle_data?.location ?? "";
         aadhar = profle_data?.aadhar ?? "";
+        email = profle_data?.email ?? "";
     }
 
     onMount(async () => {
@@ -77,7 +75,7 @@
                             size="xl"
                             stacked={false}
                             rounded={true}
-                            src={profle_data?.avatar || undefined}
+                            src={undefined}
                             alt="Profile avatar"
                         />
                     </div>
@@ -104,7 +102,7 @@
                         <Avatar
                             size="2xl"
                             rounded={true}
-                            src={profle_data?.avatar || undefined}
+                            src={undefined}
                             alt="User avatar"
                         />
                         <h2 class="mt-4 text-xl font-semibold">
@@ -129,7 +127,7 @@
                                         id="name"
                                         type="text"
                                         placeholder="John Doe"
-                                        bind:value={name}
+                                        bind:value={devoteee_name}
                                         on:blur={() => (touched.name = true)}
                                         aria-required="false"
                                         class="mt-1"
@@ -187,12 +185,12 @@
                             </div>
 
                             <div>
-                                <Label for="address">Address</Label>
+                                <Label for="location">location</Label>
                                 <Textarea
-                                    id="address"
+                                    id="location"
                                     rows="3"
                                     placeholder="123 Main St, Anytown"
-                                    bind:value={address}
+                                    bind:value={location}
                                     class="mt-1"
                                 />
                             </div>

@@ -64,3 +64,20 @@ export async function logout() {
   auth_token.set(null);
   goto("/");
 }
+
+export async function update_profile(info: { string: string }) {
+  try {
+    const res = await fetch(COMMON + "profile.update_profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: get(auth_token),
+      },
+      body: JSON.stringify(info),
+    });
+    return await res.json();
+  } catch (err: any) {
+    console.error("update_profile:", err);
+    return null;
+  }
+}

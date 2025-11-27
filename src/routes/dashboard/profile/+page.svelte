@@ -125,9 +125,9 @@
                 </div>
 
                 <div class="flex justify-between border-b pb-2">
-                    <span class="font-medium">Address</span>
+                    <span class="font-medium">location</span>
                     <span class="text-sm text-gray-600"
-                        >{profile_details.address ?? "—"}</span
+                        >{profile_details.location ?? "—"}</span
                     >
                 </div>
 
