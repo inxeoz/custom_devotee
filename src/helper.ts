@@ -4,7 +4,7 @@ import { get } from "svelte/store";
 
 import { API_BASE, isProd } from "$lib/env.js";
 
-const COMMON = `${API_BASE}/api/method/api/method/custom_booking.api.devoteee.`;
+const COMMON = `${API_BASE}/api/method/custom_booking.api.devoteee.`;
 
 console.log(
   `Running in ${isProd ? "production" : "development"} mode with API_BASE=${API_BASE}`,
@@ -94,21 +94,22 @@ export async function login_verify(phone: number, pwd: string) {
 
 export async function get_auth_token(phone: number) {
   try {
-    const url = `${API_BASE}/api/method/mahakaal.darshan_booking.doctype.session_login.session_login.get_auth_token`;
-    const res = await fetch(url, {
+    const res = await fetch(COMMON + "login.customer_login", {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         phone: phone + "",
+        password: "",
       }),
     });
 
     const data = await res.json();
 
-    auth_token.set(data.message.token);
+    console.log(data);
+
+    auth_token.set(data.message);
     user_logged_in.set(true);
     return data;
   } catch (err: any) {

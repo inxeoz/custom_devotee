@@ -156,6 +156,7 @@ export async function registration_devoteee(phone: number) {
     if (res.status === 200) {
       console.log("Registration successful");
       // console.log(await res.json());
+      return await res.json();
     } else {
       console.log("Registration failed");
     }
