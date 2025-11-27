@@ -41,3 +41,20 @@ export async function login(phone: number, password: string) {
     return null;
   }
 }
+
+export async function profile() {
+  try {
+    const res = await fetch(COMMON + "profile.profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: get(auth_token),
+      },
+    });
+    const data = await res.json();
+    return data?.message;
+  } catch (err) {
+    console.error("get_self_profile:", err);
+    return null;
+  }
+}

@@ -3,9 +3,7 @@
     import { goto } from "$app/navigation";
     import { Card, Button, Alert, Badge } from "flowbite-svelte";
 
-    import { get_self_profile } from "@src/helper_devoteee.js";
-    import { deleteAllCookies } from "@src/helper.js";
-
+    import { profile } from "@src/api.js";
     interface ProfileDetails {
         devoteee_name?: string;
         is_ekyc_complete?: number;
@@ -15,7 +13,7 @@
     export let title = "Dashboard";
     export let welcome = "Welcome back!";
 
-    let devoteee_details: ProfileDetails | null = null;
+    let profile_details: ProfileDetails | null = null;
     let devoteee_name = "";
     let is_ekyc_complete = 0;
     let show_dashboard = false;
@@ -62,14 +60,14 @@
 
     onMount(async () => {
         try {
-            const devoteee_details = await get_self_profile();
+            const profile_details = await profile();
 
-            if (devoteee_details) {
+            if (profile_details) {
                 show_dashboard = true;
-                console.log(devoteee_details);
-                console.log(devoteee_details.is_ekyc_complete);
-                devoteee_name = devoteee_details.devoteee_name || "";
-                is_ekyc_complete = devoteee_details.is_ekyc_complete || 0;
+                console.log(profile_details);
+                console.log(profile_details.is_ekyc_complete);
+                devoteee_name = profile_details.devoteee_name || "";
+                is_ekyc_complete = profile_details.is_ekyc_complete || 0;
             }
         } catch (error) {
             console.error("Failed to load profile:", error);

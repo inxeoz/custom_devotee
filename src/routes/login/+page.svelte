@@ -25,6 +25,10 @@
             auth_token.set(json_data.message);
             console.log("auth token", get(auth_token));
 
+            if (get(auth_token).length > 0) {
+                await goto("/dashboard");
+            }
+
             toast.success("Login successful");
             // await goto("/dashboard");
             // user_logged_in.set(true);
