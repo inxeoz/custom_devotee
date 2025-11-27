@@ -4,7 +4,7 @@
     import { profile } from "@src/api.js";
     import { goto } from "$app/navigation";
 
-    let profile: any = null;
+    let profile_details: any = null;
     let error: string | null = null;
     let loading = true;
 
@@ -12,7 +12,7 @@
 
     onMount(async () => {
         try {
-            profile = await profile();
+            profile_details = await profile();
         } catch (e) {
             error = "Failed to load profile";
             console.error(e);
@@ -40,23 +40,26 @@
         >
             {error}
         </div>
-    {:else if profile}
+    {:else if profile_details}
         <Card
             class="card w-full max-w-lg p-6 bg-white shadow-xl rounded-3xl transition-transform transform hover:scale-[1.02] hover:shadow-2xl"
         >
             <div class="flex flex-col items-center space-y-4">
                 <Avatar
-                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(profile.devoteee_name ?? profile.owner ?? "User")}&background=random`}
+                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(profile_details.devoteee_name ?? profile_details.owner ?? "User")}&background=random`}
                     alt="Avatar"
                     size="xl"
                     cornerStyle="rounded"
                 />
                 <div class="text-center">
                     <h2 class="text-2xl font-bold text-gray-800 mb-1">
-                        {profile.devoteee_name ?? profile.owner ?? profile.name}
+                        {profile_details.devoteee_name ??
+                            profile_details.owner ??
+                            profile_details.name}
                     </h2>
                     <p class="text-gray-500 text-sm">
-                        {profile.doctype ?? "Darshan Devoteee Profile"}
+                        {profile_details.doctype ??
+                            "Darshan Devoteee profile_details"}
                     </p>
                 </div>
             </div>
@@ -64,34 +67,38 @@
             <div class="mt-6 space-y-3 text-gray-700">
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">Phone</span>
-                    <span>{profile.phone ?? "—"}</span>
+                    <span>{profile_details.phone ?? "—"}</span>
                 </div>
 
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">Email</span>
                     <span class="text-sm text-gray-600"
-                        >{profile.email ?? profile.frappe_profile ?? "—"}</span
+                        >{profile_details.email ??
+                            profile_details.frappe_profile_details ??
+                            "—"}</span
                     >
                 </div>
 
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">Gender</span>
-                    <span class="capitalize">{profile.gender ?? "—"}</span>
+                    <span class="capitalize"
+                        >{profile_details.gender ?? "—"}</span
+                    >
                 </div>
 
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">Date of Birth</span>
-                    <span>{profile.dob}</span>
+                    <span>{profile_details.dob}</span>
                 </div>
 
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">E-KYC</span>
                     <Badge
-                        color={truthyInt(profile.is_ekyc_complete)
+                        color={truthyInt(profile_details.is_ekyc_complete)
                             ? "success"
                             : "warning"}
                     >
-                        {truthyInt(profile.is_ekyc_complete)
+                        {truthyInt(profile_details.is_ekyc_complete)
                             ? "Completed"
                             : "Pending"}
                     </Badge>
@@ -100,11 +107,11 @@
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">Companion</span>
                     <Badge
-                        color={truthyInt(profile.is_devoteee_companion)
+                        color={truthyInt(profile_details.is_devoteee_companion)
                             ? "info"
                             : "gray"}
                     >
-                        {truthyInt(profile.is_devoteee_companion)
+                        {truthyInt(profile_details.is_devoteee_companion)
                             ? "Yes"
                             : "No"}
                     </Badge>
@@ -113,20 +120,20 @@
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">Aadhar</span>
                     <span class="text-sm text-gray-600"
-                        >{profile.aadhar ?? "—"}</span
+                        >{profile_details.aadhar ?? "—"}</span
                     >
                 </div>
 
                 <div class="flex justify-between border-b pb-2">
                     <span class="font-medium">Address</span>
                     <span class="text-sm text-gray-600"
-                        >{profile.address ?? "—"}</span
+                        >{profile_details.address ?? "—"}</span
                     >
                 </div>
 
                 <div class="flex justify-between">
                     <span class="font-medium">Created On</span>
-                    <span>{profile.creation}</span>
+                    <span>{profile_details.creation}</span>
                 </div>
             </div>
 
