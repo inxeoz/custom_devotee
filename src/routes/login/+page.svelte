@@ -3,9 +3,9 @@
     import { goto } from "$app/navigation";
     import { Card, Button, Label, Input } from "flowbite-svelte";
     import { Badge } from "flowbite-svelte";
-
+    import { get } from "svelte/store";
     import { user_logged_in } from "@src/store.js";
-
+    import { auth_token } from "@src/store.js";
     import { login } from "@src/api.js";
 
     import { toast } from "svelte-sonner";
@@ -22,6 +22,9 @@
         const json_data = await login(phone, password);
 
         if (json_data?.message) {
+            auth_token.set(json_data.message);
+            console.log("auth token", get(auth_token));
+
             toast.success("Login successful");
             // await goto("/dashboard");
             // user_logged_in.set(true);
