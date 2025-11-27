@@ -1,7 +1,7 @@
 <script>
     // Import global CSS once
     import "../app.css";
-    import { user_logged_in } from "@src/store.js";
+    import { auth_token } from "@src/store.js";
     import LoadingPage from "./LoadingPage.svelte";
 
     let loading = false;
@@ -19,7 +19,7 @@
     // Import Toaster once (global notifications)
     import { Toaster } from "svelte-sonner";
     import { onMount } from "svelte";
-    import { get_logged_user, logout } from "@src/helper.js";
+    import { logout } from "@src/api.js";
 </script>
 
 {#if loading}
@@ -34,7 +34,7 @@
             </span>
 
             <div>
-                {#if $user_logged_in}
+                {#if $auth_token}
                     <Button
                         outline
                         pill
@@ -63,7 +63,7 @@
         <NavUl role="navigation" aria-label="Main navigation">
             <NavLi href="/">Home</NavLi>
 
-            {#if $user_logged_in}
+            {#if $auth_token}
                 <NavLi href="/dashboard">Dashboard</NavLi>
                 <NavLi href="/dashboard/profile">Profile</NavLi>
             {:else}
@@ -74,7 +74,7 @@
 
         <NavHamburger aria-label="Toggle menu" />
         <div>
-            {#if $user_logged_in}
+            {#if $auth_token}
                 <Button outline pill color="orange" onclick={() => logout()}>
                     Logout
                 </Button>

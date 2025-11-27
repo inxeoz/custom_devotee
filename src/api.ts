@@ -1,5 +1,6 @@
-import { auth_token, user_logged_in } from "@src/store.js";
+import { auth_token } from "@src/store.js";
 import { get } from "svelte/store";
+import { goto } from "$app/navigation";
 
 import { API_BASE, isProd } from "$lib/env.js";
 
@@ -57,4 +58,9 @@ export async function profile() {
     console.error("get_self_profile:", err);
     return null;
   }
+}
+
+export async function logout() {
+  auth_token.set(null);
+  goto("/");
 }

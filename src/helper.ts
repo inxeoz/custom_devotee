@@ -1,5 +1,5 @@
 import { goto } from "$app/navigation";
-import { user_logged_in, auth_token } from "@src/store.js";
+import { auth_token } from "@src/store.js";
 import { get } from "svelte/store";
 
 import { API_BASE, isProd } from "$lib/env.js";

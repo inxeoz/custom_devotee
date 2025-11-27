@@ -4,7 +4,6 @@
     import { Card, Button, Label, Input } from "flowbite-svelte";
     import { Badge } from "flowbite-svelte";
     import { get } from "svelte/store";
-    import { user_logged_in } from "@src/store.js";
     import { auth_token } from "@src/store.js";
     import { login } from "@src/api.js";
 

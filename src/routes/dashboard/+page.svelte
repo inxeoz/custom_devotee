@@ -63,11 +63,12 @@
             const profile_details = await profile();
 
             if (profile_details) {
-                show_dashboard = true;
                 console.log(profile_details);
                 console.log(profile_details.is_ekyc_complete);
                 devoteee_name = profile_details.devoteee_name || "";
                 is_ekyc_complete = profile_details.is_ekyc_complete || 0;
+
+                show_dashboard = true;
             }
         } catch (error) {
             console.error("Failed to load profile:", error);
