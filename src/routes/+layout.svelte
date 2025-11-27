@@ -4,7 +4,7 @@
     import { user_logged_in } from "@src/store.js";
     import LoadingPage from "./LoadingPage.svelte";
 
-    let loading = true;
+    let loading = false;
 
     import {
         Breadcrumb,
@@ -20,12 +20,6 @@
     import { Toaster } from "svelte-sonner";
     import { onMount } from "svelte";
     import { get_logged_user, logout } from "@src/helper.js";
-
-    onMount(async () => {
-        loading = true;
-        await get_logged_user();
-        loading = false;
-    });
 </script>
 
 {#if loading}
