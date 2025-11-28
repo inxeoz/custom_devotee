@@ -6,7 +6,7 @@
     import { profile } from "@src/api.js";
     interface ProfileDetails {
         devoteee_name?: string;
-        is_ekyc_complete?: number;
+        aadhar?: number;
         [key: string]: any;
     }
 
@@ -64,9 +64,9 @@
 
             if (profile_details) {
                 console.log(profile_details);
-                console.log(profile_details.is_ekyc_complete);
+                console.log(profile_details.aadhar);
                 devoteee_name = profile_details.devoteee_name || "";
-                is_ekyc_complete = profile_details.is_ekyc_complete || 0;
+                is_ekyc_complete = profile_details.aadhar.length || 0;
 
                 show_dashboard = true;
             }
