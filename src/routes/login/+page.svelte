@@ -32,7 +32,9 @@
             // await goto("/dashboard");
             // user_logged_in.set(true);
         } else {
-            toast.error("Login failed " + JSON.stringify(json_data));
+            toast.error("Login failed ");
+
+            // toast.error("Login failed " + JSON.stringify(json_data));
             loading = false;
         }
     }

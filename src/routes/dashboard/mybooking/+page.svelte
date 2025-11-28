@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import ShowAppointment from "@src/routes/ShowAppointment.svelte";
-    import { get_appointment_list } from "@src/helper_devoteee.js";
+    import { appointment_list } from "@src/api.js";
     import type { Booking, Status } from "@src/appointment.js";
 
     import { Card, Button, Badge } from "flowbite-svelte";
@@ -38,7 +38,7 @@
         loading = true;
         error = null;
 
-        const data = await get_appointment_list(limitStart, pageLength);
+        const data = await appointment_list();
         bookings = (data as any).message as Booking[];
         loading = false;
     }
@@ -103,10 +103,7 @@
                                     Darshan: {b.darshan_type}
                                 </div>
                                 <div class="text-xs text-slate-400 mt-1">
-                                    {b.darshan_date}@
-
-                                    {b.slot_start_time} to
-                                    {b.slot_end_time}
+                                    {b.appointment_datetime}
                                 </div>
                             </div>
                             <div class="ml-4">

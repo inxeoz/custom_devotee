@@ -66,7 +66,8 @@
                 console.log(profile_details);
                 console.log(profile_details.aadhar);
                 devoteee_name = profile_details.devoteee_name || "";
-                is_ekyc_complete = profile_details.aadhar.length || 0;
+                is_ekyc_complete =
+                    profile_details?.aadhar?.toString().length ?? 0;
 
                 show_dashboard = true;
             }

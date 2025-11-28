@@ -81,3 +81,19 @@ export async function update_profile(info: { string: string }) {
     return null;
   }
 }
+
+export async function appointment_list() {
+  try {
+    const res = await fetch(COMMON + "appointment.appointment_list", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: get(auth_token),
+      },
+    });
+    return await res.json();
+  } catch (err: any) {
+    console.error("update_profile:", err);
+    return null;
+  }
+}
