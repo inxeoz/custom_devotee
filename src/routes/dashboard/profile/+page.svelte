@@ -135,6 +135,19 @@
                     <span class="font-medium">Created On</span>
                     <span>{profile_details.creation}</span>
                 </div>
+                <!-- companion is [{}] type of -->
+
+                <div class="flex justify-between">
+                    <span class="font-medium">Companion</span>
+
+                    <span class="text-sm text-gray-600">
+                        {#if profile_details.companion}
+                            {#each profile_details.companion as item}
+                                <div>{item.name}</div>
+                            {/each}
+                        {/if}
+                    </span>
+                </div>
             </div>
 
             <div class="mt-8 flex justify-center space-x-4">
